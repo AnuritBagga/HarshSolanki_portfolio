@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Harsh Solanki — Mechatronics Engineer</title>
+<meta name="description" content="Portfolio of Harsh Solanki, Mechatronics Engineering undergraduate at Chandigarh University. Pneumatics and sensor integration, CAD design, Python and ROS 2.">
+<meta name="theme-color" content="#04070C">
+<meta property="og:title" content="Harsh Solanki — Mechatronics Engineer">
+<meta property="og:description" content="Pneumatics and sensor integration, CAD design, Python and ROS 2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="lock">
+
+<!-- ═══════════════════ LOADER: robotic pick-and-place cell ═══════════════════ -->
+<div id="loader" role="status" aria-label="Loading Harsh Solanki's portfolio">
+  <div class="lgrid" aria-hidden="true"></div>
+  <div class="door l" aria-hidden="true"><i></i></div>
+  <div class="door r" aria-hidden="true"><i></i></div>
+
+  <div class="lshell">
+    <div class="cell" aria-hidden="true">
+      <svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2A3E57"/><stop offset="1" stop-color="#121D2E"/>
+          </linearGradient>
+          <linearGradient id="cyanG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8FE3FF"/><stop offset="1" stop-color="#0B84E0"/>
+          </linearGradient>
+          <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="7" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- machine frame -->
+        <rect x="40" y="330" width="520" height="13" fill="url(#steel)"/>
+        <rect x="40" y="330" width="520" height="2" fill="#3FC8FF" opacity=".55"/>
+        <rect x="56" y="80" width="14" height="252" fill="url(#steel)"/>
+        <rect x="530" y="80" width="14" height="252" fill="url(#steel)"/>
+
+        <!-- X rail -->
+        <rect x="56" y="80" width="488" height="14" fill="url(#steel)"/>
+        <rect x="56" y="93" width="488" height="1.5" fill="#3FC8FF" opacity=".5"/>
+        <g stroke="#3FC8FF" stroke-width="1" opacity=".3">
+          <path d="M80 96v6M110 96v6M140 96v6M170 96v6M200 96v6M230 96v6M260 96v6M290 96v6M320 96v6M350 96v6M380 96v6M410 96v6M440 96v6M470 96v6M500 96v6"/>
+        </g>
+
+        <!-- trays -->
+        <g id="trayA">
+          <rect x="146" y="306" width="82" height="9" fill="url(#steel)"/>
+          <rect x="146" y="306" width="82" height="1.5" fill="#3FC8FF" opacity=".45"/>
+          <rect x="172" y="280" width="26" height="26" id="cubeSrc" fill="url(#cyanG)" opacity=".95"/>
+        </g>
+        <g id="trayB">
+          <rect x="378" y="306" width="82" height="9" fill="url(#steel)"/>
+          <rect x="378" y="306" width="82" height="1.5" fill="#3FC8FF" opacity=".45"/>
+          <rect x="407" y="280" width="26" height="26" id="cubeDst" fill="url(#cyanG)" opacity="0"/>
+          <circle id="dstFlash" cx="420" cy="293" r="30" fill="#3FC8FF" opacity="0" filter="url(#soft)"/>
+        </g>
+
+        <!-- gantry carriage + Z axis -->
+        <g id="gCarriage" transform="translate(300,0)">
+          <g id="gZ">
+            <rect x="-5" y="6" width="10" height="206" fill="url(#steel)"/>
+            <rect x="-5" y="6" width="2" height="206" fill="#3FC8FF" opacity=".35"/>
+            <rect x="-17" y="212" width="34" height="17" fill="url(#steel)"/>
+            <circle cx="0" cy="220" r="3.2" fill="#3FC8FF"/>
+            <rect id="jawL" x="-16" y="229" width="6" height="30" fill="url(#steel)"/>
+            <rect id="jawR" x="10" y="229" width="6" height="30" fill="url(#steel)"/>
+            <rect id="cubeHeld" x="-13" y="226" width="26" height="26" fill="url(#cyanG)" opacity="0"/>
+          </g>
+          <rect x="-36" y="66" width="72" height="38" rx="2" fill="url(#steel)"/>
+          <rect x="-36" y="66" width="72" height="2" fill="#3FC8FF" opacity=".6"/>
+          <circle cx="0" cy="85" r="5" fill="none" stroke="#3FC8FF" stroke-width="1.4" opacity=".8"/>
+          <circle class="pulse-ring" cx="0" cy="85" r="7" fill="none" stroke="#3FC8FF" stroke-width="1.2"/>
+        </g>
+
+        <text x="58" y="362" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2" fill="#41607F">PICK &#183; PLACE &#183; REPEAT</text>
+      </svg>
+    </div>
+
+    <div class="lname glitch" id="lname" data-t="HARSH SOLANKI" aria-hidden="true">HARSH SOLANKI</div>
+    <div class="lrole" id="lrole" aria-hidden="true">MECHATRONICS ENGINEER</div>
+
+    <div class="lbar"><i id="lfill"></i></div>
+    <div class="lmeta">
+      <span id="lline">&gt; initializing<span class="caret"></span></span>
+      <span id="lpct">0%</span>
+    </div>
+  </div>
+
+  <img class="peek" id="peek" src="assets/img/peek.webp" alt="">
+</div>
+
+<!-- ═══════════════════ AMBIENT ═══════════════════ -->
+<div class="ambient" aria-hidden="true">
+  <div class="grid"></div><i class="beam"></i><i class="beam"></i><i class="beam"></i>
+</div>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <svg class="mono-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M6 4v40M6 24h24M30 4v40" stroke="#E9F4FF" stroke-width="4" fill="none" stroke-linecap="square"/>
+        <path d="M42 10c-6-4-14-1-14 5s14 5 14 12-9 9-14 5" stroke="#3FC8FF" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="bt">Harsh Solanki</span>
+        <span class="bs">MECHATRONICS ENGINEER</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Sections">
+      <a href="#top">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn--primary" id="resumeBtn" href="assets/docs/Harsh_Solanki_Resume.pdf" download="Harsh_Solanki_Resume.pdf">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+      Résumé
+    </a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i></i><i></i><i></i></button>
+  </div>
+  <div class="scroll-rail" id="rail"></div>
+</header>
+
+<main>
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-media" aria-hidden="true">
+    <video id="heroVid" poster="assets/media/poster.jpg" muted playsinline loop preload="auto">
+      <source id="srcWebm" src="assets/media/walk.webm" type="video/webm">
+      <source id="srcMp4" src="assets/media/walk.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+
+  <div class="hero-in wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="pill"><span class="led"></span>OPEN TO INTERNSHIPS &amp; GRADUATE ROLES</span>
+        <h1>Machines that<br><span class="l2">make decisions.</span></h1>
+        <p class="hero-sub">I'm Harsh — a Mechatronics Engineering undergraduate at Chandigarh University. I work where pneumatics, sensors, CAD and code overlap, and I build until the thing actually runs.</p>
+        <div class="hero-cta">
+          <a class="btn btn--primary" href="#projects">See the projects</a>
+          <button class="btn" type="button" id="heroAsk">Ask HarshBot</button>
+        </div>
+      </div>
+      <div class="index-rail" aria-hidden="true">
+        <span>ROBOTICS</span>
+        <span>AUTOMATION</span>
+        <span>PNEUMATICS</span>
+        <span>SENSOR INTEGRATION</span>
+        <span>CAD DESIGN</span>
+        <span>ROS 2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="console">
+    <div class="wrap console-in">
+      <div class="c"><span class="k">PROJECTS BUILT</span><span class="v"><b>03</b>robot, conveyor, coil</span></div>
+      <div class="c"><span class="k">COMPETITIONS</span><span class="v"><b>02</b>Tekathon podiums</span></div>
+      <div class="c"><span class="k">STUDYING</span><span class="v">B.E. Mechatronics, Chandigarh University</span></div>
+      <div class="c"><span class="k">BASED IN</span><span class="v">Kasganj, UP — studying in Mohali</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ MARQUEE ═══════════════════ -->
+<div class="marquee" aria-hidden="true"><ul id="marquee"></ul></div>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section class="sect" id="about">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div><span class="tag">01 / ABOUT</span><h2 class="h-sec">Who is building</h2></div>
+      <div class="line"></div>
+    </div>
+    <div class="about">
+      <div class="frame rv">
+        <span class="corner a"></span><span class="corner b"></span>
+        <span class="corner c"></span><span class="corner d"></span>
+        <img src="assets/img/portrait.webp" alt="Harsh Solanki">
+      </div>
+      <div class="rv">
+        <p class="about-lead">I like the moment a pile of parts stops being parts and starts behaving like one machine.</p>
+        <p>Most of what I know came from building things that had to work in front of a judging panel: an Arduino pick-and-place robot, a camera-calibrated sorting conveyor, a Tesla coil that lit fluorescent tubes across an air gap.</p>
+        <p>My comfort zone is the middle layer — pneumatics and sensor integration (inductive, proximity, infrared, pressure, solenoid), the CAD that holds it all together, and the logic that sequences it. Fusion 360, AutoCAD and SolidWorks for design. Python and ROS 2 for control. Basic PLC and automation concepts for the factory floor.</p>
+        <p>I'm also curious about power: IC engines, electric drives and axial flux motors. Two Tekathon podiums — third in 2024, second in 2025 — taught me more about building fast with a team than any single course did.</p>
+        <dl class="facts">
+          <div><dt>STUDYING</dt><dd>B.E. Mechatronics Engineering — Chandigarh University, Mohali (Aug 2023 – present)</dd></div>
+          <div><dt>HOME</dt><dd>Kasganj, Uttar Pradesh</dd></div>
+          <div><dt>LANGUAGES</dt><dd>Hindi, English</dd></div>
+          <div><dt>SOFT SKILLS</dt><dd>Confident, fast learner, adaptable, critical thinking</dd></div>
+          <div><dt>OFF THE CLOCK</dt><dd>Cricket, chess, sudoku</dd></div>
+          <div><dt>LOOKING FOR</dt><dd>Automation, robotics and product engineering internships or graduate roles</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+<section class="sect" id="projects">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div><span class="tag">02 / PROJECTS</span><h2 class="h-sec">Things I have built</h2></div>
+      <div class="line"></div>
+    </div>
+
+    <article class="proj rv">
+      <div class="proj-meta">
+        <span class="num">P-01 / PICK AND PLACE</span>
+        <h3>RPR Robot</h3>
+        <p class="when">INDIVIDUAL · AUG 2025 – NOV 2025</p>
+        <p>An Arduino-based pick-and-place robot that moves objects to predefined positions using motor control and sensor feedback. I integrated the motors, the sensors and the mechanical gripper so the arm lands accurately, moves smoothly, and holds a part without dropping it.</p>
+        <ul class="chips"><li>Arduino</li><li>Motor control</li><li>Sensor feedback</li><li>Gripper mechanism</li><li>RPR kinematics</li></ul>
+      </div>
+      <div class="viz" data-viz="arm">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g stroke="#3FC8FF" fill="none" stroke-width="1" opacity=".35">
+            <path d="M40 205h320"/>
+          </g>
+          <rect x="176" y="186" width="48" height="19" fill="#22384F"/>
+          <g class="arm-sh">
+            <rect x="192" y="110" width="16" height="80" fill="#2C4459"/>
+            <g class="arm-el">
+              <rect x="200" y="102" width="74" height="14" fill="#2C4459"/>
+              <g class="arm-gr">
+                <rect x="266" y="110" width="12" height="16" fill="#35526B"/>
+                <rect x="262" y="124" width="4" height="16" fill="#35526B"/>
+                <rect x="278" y="124" width="4" height="16" fill="#35526B"/>
+                <rect x="264" y="126" width="16" height="16" fill="#3FC8FF" class="arm-part"/>
+              </g>
+            </g>
+            <circle cx="200" cy="110" r="5" fill="#0B84E0"/>
+          </g>
+          <circle cx="200" cy="188" r="7" fill="#0B84E0"/>
+          <rect x="300" y="178" width="60" height="8" fill="#22384F"/>
+          <rect x="60" y="178" width="60" height="8" fill="#22384F"/>
+        </svg>
+        <span class="vlabel">RPR · REVOLUTE–PRISMATIC–REVOLUTE</span>
+      </div>
+    </article>
+
+    <article class="proj rv">
+      <div class="proj-meta">
+        <span class="num">P-02 / MACHINE VISION</span>
+        <h3>Conveyor sorting with camera calibration</h3>
+        <p class="when">TEAM PROJECT · JAN 2025 – APR 2025</p>
+        <p>A conveyor-based sorting system that detects, identifies and sorts objects from their visual features. The part that mattered was real-time camera calibration and the control logic that keeps detection synchronised with belt movement, so a part is diverted at exactly the right instant.</p>
+        <ul class="chips"><li>Camera calibration</li><li>Image processing</li><li>Conveyor synchronisation</li><li>Control logic</li><li>Python</li></ul>
+      </div>
+      <div class="viz" data-viz="belt">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="20" y="170" width="360" height="16" fill="#1B2D42"/>
+          <g class="belt-ticks" stroke="#3FC8FF" stroke-width="2" opacity=".45">
+            <path d="M30 178h14M70 178h14M110 178h14M150 178h14M190 178h14M230 178h14M270 178h14M310 178h14M350 178h14"/>
+          </g>
+          <circle cx="34" cy="178" r="13" fill="none" stroke="#33506B" stroke-width="3"/>
+          <circle cx="366" cy="178" r="13" fill="none" stroke="#33506B" stroke-width="3"/>
+          <!-- camera -->
+          <rect x="176" y="40" width="48" height="30" rx="3" fill="#2C4459"/>
+          <rect x="224" y="49" width="12" height="12" fill="#35526B"/>
+          <circle cx="200" cy="72" r="6" fill="#3FC8FF" class="cam-eye"/>
+          <path d="M200 76 L150 166 H250 Z" fill="#3FC8FF" opacity=".1" class="cam-cone"/>
+          <path class="scan" d="M152 120h96" stroke="#8FE3FF" stroke-width="2" opacity=".9"/>
+          <!-- parts -->
+          <rect class="part p1" x="0" y="150" width="20" height="20" fill="#3FC8FF"/>
+          <rect class="part p2" x="0" y="152" width="16" height="18" fill="#5E7E9E"/>
+          <rect class="part p3" x="0" y="150" width="20" height="20" fill="#3FC8FF"/>
+        </svg>
+        <span class="vlabel">DETECT · CALIBRATE · SYNC · DIVERT</span>
+      </div>
+    </article>
+
+    <article class="proj rv">
+      <div class="proj-meta">
+        <span class="num">P-03 / HIGH VOLTAGE</span>
+        <h3>Tesla coil — wireless power transmission</h3>
+        <p class="when">TEAM PROJECT · OCT 2024 – DEC 2024</p>
+        <p>A miniature Tesla coil built to demonstrate electromagnetic induction and wireless energy transfer. Driven with high-frequency alternating current, it lit fluorescent bulbs across an air gap with no electrical contact at all.</p>
+        <ul class="chips"><li>High-frequency AC</li><li>Electromagnetic induction</li><li>Coil winding</li><li>Resonant coupling</li></ul>
+      </div>
+      <div class="viz" data-viz="coil">
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="150" y="212" width="100" height="12" fill="#22384F"/>
+          <rect x="176" y="96" width="48" height="118" fill="#1D3149"/>
+          <g stroke="#3A5C7C" stroke-width="2">
+            <path d="M176 106h48M176 118h48M176 130h48M176 142h48M176 154h48M176 166h48M176 178h48M176 190h48M176 202h48"/>
+          </g>
+          <ellipse cx="200" cy="88" rx="44" ry="15" fill="#2E4A63"/>
+          <ellipse cx="200" cy="85" rx="44" ry="15" fill="#3B5F7D"/>
+          <g class="arcs" stroke="#8FE3FF" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M244 82 l22-14 -10 18 24 -6" class="a1"/>
+            <path d="M156 82 l-24-12 12 18 -26 -4" class="a2"/>
+            <path d="M200 70 l-8-20 16 8 -4 -22" class="a3"/>
+          </g>
+          <rect x="300" y="60" width="14" height="110" rx="7" fill="#20384F" class="tube"/>
+          <rect x="70" y="60" width="14" height="110" rx="7" fill="#20384F" class="tube t2"/>
+        </svg>
+        <span class="vlabel">RESONANT TRANSFER ACROSS AN AIR GAP</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══════════════════ SKILLS ═══════════════════ -->
+<section class="sect" id="skills">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div><span class="tag">03 / CAPABILITY</span><h2 class="h-sec">What I can do alone</h2></div>
+      <div class="line"></div>
+    </div>
+    <div class="skills">
+      <div class="sgroup rv">
+        <h3>Pneumatics &amp; sensors</h3>
+        <p>Choosing the right sensor, wiring it cleanly, and making the actuation repeatable.</p>
+        <div class="bar" data-v="88"><div class="r"><span class="n">Sensor integration — inductive, proximity, IR</span><span class="p">88</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="85"><div class="r"><span class="n">Pneumatic circuits &amp; solenoid valves</span><span class="p">85</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="80"><div class="r"><span class="n">Pressure sensing &amp; actuation</span><span class="p">80</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="84"><div class="r"><span class="n">Microcontroller interfacing</span><span class="p">84</span></div><div class="t"><i class="f"></i></div></div>
+      </div>
+      <div class="sgroup rv">
+        <h3>CAD &amp; mechanical design</h3>
+        <p>Parts and assemblies drawn to be made, not just rendered.</p>
+        <div class="bar" data-v="88"><div class="r"><span class="n">Fusion 360</span><span class="p">88</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="85"><div class="r"><span class="n">AutoCAD</span><span class="p">85</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="82"><div class="r"><span class="n">SolidWorks</span><span class="p">82</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="76"><div class="r"><span class="n">Mechanisms &amp; gripper design</span><span class="p">76</span></div><div class="t"><i class="f"></i></div></div>
+      </div>
+      <div class="sgroup rv">
+        <h3>Programming &amp; robotics</h3>
+        <p>Enough code to make the hardware behave, and enough vision to let it see.</p>
+        <div class="bar" data-v="86"><div class="r"><span class="n">Arduino &amp; embedded control</span><span class="p">86</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="85"><div class="r"><span class="n">Python</span><span class="p">85</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="78"><div class="r"><span class="n">Image processing &amp; camera calibration</span><span class="p">78</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="72"><div class="r"><span class="n">ROS 2</span><span class="p">72</span></div><div class="t"><i class="f"></i></div></div>
+      </div>
+      <div class="sgroup rv">
+        <h3>Power &amp; automation</h3>
+        <p>The drive side: what turns current into torque, and what sequences a line.</p>
+        <div class="bar" data-v="76"><div class="r"><span class="n">Electric drives</span><span class="p">76</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="72"><div class="r"><span class="n">IC engines</span><span class="p">72</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="70"><div class="r"><span class="n">Axial flux motors</span><span class="p">70</span></div><div class="t"><i class="f"></i></div></div>
+        <div class="bar" data-v="68"><div class="r"><span class="n">PLC &amp; automation concepts</span><span class="p">68</span></div><div class="t"><i class="f"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ JOURNEY ═══════════════════ -->
+<section class="sect" id="journey">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <div><span class="tag">04 / JOURNEY</span><h2 class="h-sec">How it went</h2></div>
+      <div class="line"></div>
+    </div>
+    <div class="journey-grid">
+      <ol class="tl rv">
+        <li class="hi">
+          <span class="yr">AUG 2025 – NOV 2025</span>
+          <h3>RPR pick-and-place robot</h3>
+          <p class="org">Individual project</p>
+          <p class="d">Designed, built and programmed an Arduino-driven arm that picks and places objects at predefined locations using motor control and sensor feedback.</p>
+        </li>
+        <li>
+          <span class="yr">2025</span>
+          <h3>Tekathon 4.0 — second place</h3>
+          <p class="org">Chandigarh University</p>
+          <p class="d">Second podium in two years, one step up from 2024.</p>
+        </li>
+        <li>
+          <span class="yr">JAN 2025 – APR 2025</span>
+          <h3>Conveyor sorting system</h3>
+          <p class="org">Team project</p>
+          <p class="d">Camera calibration and image processing to detect and sort objects, with control logic synchronised to belt movement.</p>
+        </li>
+        <li>
+          <span class="yr">OCT 2024 – DEC 2024</span>
+          <h3>Tesla coil prototype</h3>
+          <p class="org">Team project</p>
+          <p class="d">Miniature coil demonstrating electromagnetic induction — lit fluorescent bulbs wirelessly with high-frequency AC.</p>
+        </li>
+        <li>
+          <span class="yr">2024</span>
+          <h3>Tekathon 3.0 — third place</h3>
+          <p class="org">Chandigarh University</p>
+          <p class="d">First competition podium.</p>
+        </li>
+        <li>
+          <span class="yr">JUN 2024 – JUL 2024</span>
+          <h3>Social internship</h3>
+          <p class="org">Field study, rural communities</p>
+          <p class="d">Village field visits studying socio-economic conditions, and conversations with local vendors and small-scale workers about heat, dust and missing infrastructure — a reminder of who engineering is actually for.</p>
+        </li>
+        <li>
+          <span class="yr">AUG 2023</span>
+          <h3>B.E. Mechatronics Engineering begins</h3>
+          <p class="org">Chandigarh University, Mohali</p>
+          <p class="d">Machine design, sensors and instrumentation, microcontrollers, drives and manufacturing.</p>
+        </li>
+      </ol>
+      <aside class="medals rv">
+        <div class="medal"><div class="pos">2nd</div><div class="ev">Tekathon 4.0</div><div class="yr2">2025 · CHANDIGARH UNIVERSITY</div></div>
+        <div class="medal"><div class="pos">3rd</div><div class="ev">Tekathon 3.0</div><div class="yr2">2024 · CHANDIGARH UNIVERSITY</div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<section class="sect" id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <div class="rv">
+        <h2 class="shout">Let's build<br><span>something real.</span></h2>
+        <p class="lead">Internship, graduate role, or a build that has stalled halfway — send it over. I answer quickly.</p>
+        <a class="btn btn--primary" href="mailto:harshthakur6647@gmail.com">Email Harsh</a>
+      </div>
+      <div class="links rv">
+        <a href="mailto:harshthakur6647@gmail.com">
+          <span><span class="k">EMAIL</span><span class="v">harshthakur6647@gmail.com</span></span>
+          <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="tel:+918755688171">
+          <span><span class="k">PHONE</span><span class="v">+91 87556 88171</span></span>
+          <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/harsh-solanki-04441a34a/" target="_blank" rel="noopener">
+          <span><span class="k">LINKEDIN</span><span class="v">in/harsh-solanki-04441a34a</span></span>
+          <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="assets/docs/Harsh_Solanki_Resume.pdf" download="Harsh_Solanki_Resume.pdf" id="resumeBtn2">
+          <span><span class="k">RÉSUMÉ</span><span class="v">Download the PDF</span></span>
+          <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>
+        </a>
+        <a href="#" id="askBot2">
+          <span><span class="k">FASTEST ANSWER</span><span class="v">Ask HarshBot instead</span></span>
+          <svg class="arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div><span class="k">NAME</span><span class="v">Harsh Solanki</span></div>
+      <div><span class="k">DISCIPLINE</span><span class="v">Mechatronics Engineering</span></div>
+      <div><span class="k">INSTITUTE</span><span class="v">Chandigarh University, Mohali</span></div>
+      <div><span class="k">STATUS</span><span class="v">Open to opportunities</span></div>
+    </div>
+    <div class="fbottom">
+      <span>© <span id="yr">2026</span> Harsh Solanki</span>
+      <span>Hand-built. No template.</span>
+      <span>Website made by <a href="mailto:baggaanurit@gmail.com" style="color: #3FC8FF; text-decoration: none;">Anurit Bagga</a> · <a href="https://github.com/AnuritBagga/HarshSolanki_portfolio" target="_blank" rel="noopener" style="color: #3FC8FF; text-decoration: none;">GitHub</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════ HARSHBOT ═══════════════════ -->
+<div id="bot">
+  <div class="bot-say" id="botSay">
+    Hi, I'm Harsh 👋 Ask me anything about my projects or skills.
+    <button class="x" id="sayX" aria-label="Dismiss">✕</button>
+  </div>
+  <button class="bot-figure" id="botBtn" aria-label="Open HarshBot chat" aria-expanded="false" aria-controls="chat">
+    <img src="assets/img/harshbot.webp" alt="">
+  </button>
+</div>
+
+<div id="chat" role="dialog" aria-label="Chat with HarshBot">
+  <div class="chat-top">
+    <span class="dot"></span>
+    <span><span class="nm">HarshBot</span><br><span class="st">ONLINE / ASK ANYTHING</span></span>
+    <button id="chatClose" aria-label="Close chat">✕</button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-chips" id="chatChips"></div>
+  <form class="chat-form" id="chatForm">
+    <input id="chatInput" type="text" autocomplete="off" placeholder="Ask about projects, skills, studies…" aria-label="Message HarshBot">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<noscript><style>
+#loader{display:none!important}body{overflow:auto!important}
+.rv{opacity:1!important;transform:none!important}
+.hero-media video{opacity:1!important}
+.bot-figure{transform:none!important;opacity:1!important}
+</style></noscript>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/harshbot.js"></script>
+</body>
+</html>
