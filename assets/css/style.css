@@ -217,10 +217,11 @@ body.go .hero-media video{opacity:1}
   aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
 .viz::before{content:"";position:absolute;inset:0;
   background-image:linear-gradient(rgba(120,190,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,190,255,.05) 1px,transparent 1px);
-  background-size:26px 26px}
-.viz svg{width:100%;height:100%;position:relative}
+  background-size:26px 26px;z-index:1;pointer-events:none}
+.viz svg{width:100%;height:100%;position:relative;z-index:2}
+.viz img,.viz video{width:100%;height:100%;object-fit:cover;border-radius:8px;position:relative;z-index:0}
 .viz .vlabel{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:.58rem;
-  letter-spacing:.14em;color:var(--dim)}
+  letter-spacing:.14em;color:var(--dim);z-index:3;text-shadow:0 1px 4px rgba(4,7,12,.9)}
 
 /* =========================================================
    SKILLS
