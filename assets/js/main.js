@@ -207,20 +207,10 @@
     }).catch(function () { /* capability unavailable: plain link stays */ });
   })();
 
-  /* boot */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', runLoader);
-  } else {
-    runLoader();
-  }
-})();
-
-
   /* ---------------------------------------------------------
-     Cursor Glitter Effect
+     7. Cursor Glitter Effect
      --------------------------------------------------------- */
   (function initCursorGlow() {
-    // Create cursor glow element
     var glow = document.createElement('div');
     glow.className = 'cursor-glow';
     document.body.appendChild(glow);
@@ -230,18 +220,15 @@
     var isMoving = false;
     var moveTimeout;
 
-    // Track mouse position
     document.addEventListener('mousemove', function(e) {
       mouseX = e.clientX;
       mouseY = e.clientY;
       
-      // Show glow when moving
       if (!isMoving) {
         isMoving = true;
         glow.classList.add('active');
       }
       
-      // Hide after stopping
       clearTimeout(moveTimeout);
       moveTimeout = setTimeout(function() {
         isMoving = false;
@@ -249,9 +236,7 @@
       }, 150);
     });
 
-    // Smooth animation loop
     function animate() {
-      // Smooth follow with easing
       glowX += (mouseX - glowX) * 0.15;
       glowY += (mouseY - glowY) * 0.15;
       
@@ -265,22 +250,19 @@
   })();
 
   /* ---------------------------------------------------------
-     Media Lightbox (Click to Fullscreen)
+     8. Media Lightbox (Click to Fullscreen)
      --------------------------------------------------------- */
   (function initMediaLightbox() {
     var mediaElements = $$('.viz img, .viz video');
     
     mediaElements.forEach(function(media) {
       media.addEventListener('click', function() {
-        // Create lightbox overlay
         var lightbox = document.createElement('div');
         lightbox.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(4,7,12,0.95);display:flex;align-items:center;justify-content:center;padding:40px;cursor:zoom-out;animation:fadeIn 0.3s ease;';
         
-        // Clone the media element
         var clone = media.cloneNode(true);
         clone.style.cssText = 'max-width:90vw;max-height:90vh;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 20px 80px rgba(0,0,0,0.8);animation:zoomIn 0.3s ease;';
         
-        // If it's a video, ensure it plays
         if (clone.tagName === 'VIDEO') {
           clone.muted = true;
           clone.loop = true;
@@ -290,7 +272,6 @@
         lightbox.appendChild(clone);
         document.body.appendChild(lightbox);
         
-        // Close on click
         lightbox.addEventListener('click', function() {
           lightbox.style.animation = 'fadeOut 0.25s ease';
           clone.style.animation = 'zoomOut 0.25s ease';
@@ -299,7 +280,6 @@
           }, 250);
         });
         
-        // Close on Escape key
         var escHandler = function(e) {
           if (e.key === 'Escape') {
             lightbox.click();
@@ -310,18 +290,18 @@
       });
     });
     
-    // Add animation keyframes
     if (!document.getElementById('lightbox-animations')) {
       var style = document.createElement('style');
       style.id = 'lightbox-animations';
-      style.textContent = `
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
-        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        @keyframes zoomOut { from { transform: scale(1); opacity: 1; } to { transform: scale(0.8); opacity: 0; } }
-      `;
+      style.textContent = '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } } @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } } @keyframes zoomOut { from { transform: scale(1); opacity: 1; } to { transform: scale(0.8); opacity: 0; } }';
       document.head.appendChild(style);
     }
   })();
 
+  /* boot */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runLoader);
+  } else {
+    runLoader();
+  }
 })();
